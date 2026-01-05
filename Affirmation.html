@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Affirmations Widget</title>
+  <style>
+    body { font-family: serif; text-align: center; margin: 40px; }
+    #affirmation { font-size: 24px; padding: 12px; }
+    button { padding: 8px 14px; font-size: 18px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<p id="affirmation">Loading affirmation…</p>
+<button onclick="loadAffirmation()">New affirmation</button>
+
+<script>
+async function loadAffirmation() {
+  try {
+    const res = await fetch('https://www.affirmations.dev');
+    const data = await res.json();
+    document.getElementById('affirmation').textContent = data.affirmation;
+  } catch (e) {
+    document.getElementById('affirmation').textContent = 'Could not load right now';
+  }
+}
+// load one on open
+loadAffirmation();
+</script>
+
+</body>
+</html>
